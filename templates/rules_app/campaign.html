@@ -1,0 +1,40 @@
+{% extends 'rules_app/base.html' %}
+
+{% block content %}
+  {% for i in items %}
+
+    <div class="card">
+      <div class="card-header">
+        Campaign Name: Example Campaign {{ i }}
+      </div>
+      <div class="card-body">
+        <h5 class="card-title"><strong>Ad Account:</strong> Example Ad Account</h5>
+        <p class="card-text"><strong>Status:</strong> Active</p>
+        <p class="card-text"><strong>Lifetime Spend Cap:</strong> $30</p>
+        <p class="card-text"><strong>Spendings:</strong> $15</p>
+        <p class="card-text"><strong>Total Checkouts:</strong> 10</p>
+        <hr>
+        <h5 class="card-title">Update Budget Rule</h5>
+        <div class="row">
+          <div class="col-10">
+            <p class="card-text">Minimum Sales Required to Increase Budget: 15</p>
+          </div>
+          <div class="col-2">
+            <span class="badge bg-success">Activated</span>
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col-6">
+            <button class="btn btn-outline-danger">Disable Rule</button>
+          </div>
+          <div class="col-6">
+            <a href="{% url 'update_budget' %}">
+            <button  class="btn btn-outline-warning">Update Rule</button>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+{% endblock %}

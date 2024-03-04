@@ -1,0 +1,29 @@
+{% extends 'rules_app/base.html' %}
+
+{% block content %}
+<!--    Add Rule Section-->
+    <div class="container d-flex justify-content-center h-100">
+        <div class="col-12 my-auto border justify-content-center bg-primary-subtle p-3">
+            <div class="col">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <div class="row text-center">
+                        <label for="strategy_name" class="form-label">Strategy Name</label>
+                    </div>
+                    <div class="row mb-3">
+                        {{strategy_form.name}}
+                    </div>
+                    <div class="row mb-3">
+                        {{strategy_form.ad_account_id}}
+                    </div>
+                    <div class="row mb-3">
+                        {{strategy_form.api_token}}
+                    </div>
+                    <div class="row justify-content-center">
+                        <button type="submit" class="col-auto btn btn-outline-primary"> Continue </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends 'rules_app/base.html' %}
+
+{% block content %}
+<!--    Add Rule Section-->
+    <div class="row justify-content-center py-4 my-4">
+
+        <div class="row justify-content-center ">
+            <div class="col-auto px-2 pt-2 mb-2">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">Ad Account</h5>
+                    <form method="post" action="{%url 'strategies_page'%}">
+                      {% csrf_token %}
+                      <div class="form-group m-1 text-center">
+                        <div class="row mx-1"><label for="name">Name</label></div>
+                        <div class="row mx-1">{{ ad_acc_form.name }}</div>
+                      </div>
+                        <hr>
+                      <div class="form-group  m-1 text-center">
+                          <div class="row mx-1"><label for="api_token">API Token</label></div>
+                          <div class="row mx-1">{{ ad_acc_form.api_token }}</div>
+                      </div>
+                      <div class="form-group  m-1 text-center">
+                          <div class="row mx-1"><label for="ad_account_id">Ad Account ID</label></div>
+                          <div class="row mx-1">{{ ad_acc_form.ad_account_id }}</div>
+                      </div>
+                        <div class="row"></div>
+                        <div class="row justify-content-center mt-2">
+                            <div class="col-auto">
+                                <button type="submit" class="btn btn-primary">Confirm</button>
+                            </div>
+                        </div>
+                    </form>
+                  </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <a href="{% url 'add_rule' ad_acc_obj.pk %}" class="col-auto mb-4 ">
+            <button class="btn btn-outline-primary"> Add New Strategy</button>
+        </a>
+        {% for strategy in strategies %}
+            <div class="row mb-2">
+                <div class="col-6 offset-3">
+                    <div class="card">
+                        <div class="card-body ">
+                            <h5 class="card-title bg-light">{{strategy.name}}</h5>
+                            <div class="row my-2">
+                                <p class="card-text">{{strategy.description}}</p>
+                            </div>
+                            <div class="row">
+                                    {% if strategy.status == "A" %}
+                                        <p class="fw-medium text-success">Active</p>
+                                    {%else%}
+                                        <p class="fw-medium text-warning">Paused</p>
+                                    {%endif%}
+                            </div>
+                            <div class="row mx-1">
+                                <a href="{% url 'rule' strategy.pk %}" class="col-3 btn btn-outline-primary">Manage</a>
+                                {% if strategy.status == "A" %}
+                                <a href="{% url 'p_a_rule' strategy.pk 'P' %}" class="col-2 offset-3 btn btn-outline-warning">Pause</a>
+                                {%else%}
+                                <a href="{% url 'p_a_rule' strategy.pk 'A'%}" class="col-2 offset-3 btn btn-outline-success">Activate</a>
+                                {%endif%}
+                                <a href="{% url 'delete_rule' strategy.pk %}" class="col-2 btn btn-outline-danger ms-3">Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
